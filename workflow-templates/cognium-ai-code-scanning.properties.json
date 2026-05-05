@@ -1,0 +1,14 @@
+{
+  "name": "Cognium AI Security Scan",
+  "description": "Run Cognium AI SAST and publish SARIF results to GitHub code scanning.",
+  "iconName": "octicon shield",
+  "creator": "Cognium",
+  "categories": [
+    "Code Scanning",
+    "JavaScript",
+    "TypeScript",
+    "Java",
+    "Python",
+    "Rust"
+  ]
+}
