@@ -1,0 +1,29 @@
+name: Cognium AI Security Scan
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+permissions:
+  contents: read
+  security-events: write
+  # Uncomment for LLM mode with GitHub Models.
+  # models: read
+
+jobs:
+  cognium-ai:
+    name: Cognium AI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Run Cognium AI
+        uses: cogniumhq/cognium-ai-action@v1
+        with:
+          mode: static
+          path: .
+          upload-sarif: "true"
+          fail-on-findings: "false"
