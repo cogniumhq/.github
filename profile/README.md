@@ -1,6 +1,6 @@
 # Cognium Labs
 
-Building open infrastructure for the agentic era.
+Building coding infrastructure for the agentic era.
 
 ## Projects
 
@@ -12,7 +12,8 @@ A trusted registry for agentic skills and workflows.
 
 ## Repositories
 
-- **[techspec](https://github.com/cogniumhq/techspec)** — Technical specifications and roadmap
+- **[cognium](https://github.com/cogniumhq/cognium)** — SAST CLI
+- **[circle-ir](https://github.com/cogniumhq/circle-ir)** — SAST library
 
 ## Links
 
