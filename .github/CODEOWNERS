@@ -1,0 +1,29 @@
+# Code owners for cogniumhq/.github.
+#
+# This repository is small but high-leverage, and both of its directories
+# reach outside it:
+#
+#   profile/            renders at github.com/cogniumhq — the org's public face
+#   workflow-templates/ is offered to every org repo under
+#                       Actions -> New workflow, so a change here becomes
+#                       CI that other repositories adopt and run
+#
+# The repository must stay PUBLIC for the org profile README to render, so
+# visibility is not an access control here — this file and branch protection
+# are.
+#
+# Requires @cogniumhq/coreteam to keep write access and "Require review from
+# Code Owners" to stay enabled. Verify with:
+#   gh api repos/cogniumhq/.github/codeowners/errors --jq '.errors|length'
+#
+# See cogniumhq/cognium-dev#442.
+
+* @cogniumhq/coreteam
+
+# CI that other repositories adopt and execute. The scanning template requests
+# `security-events: write`; a change to what it runs, or to the action version
+# it pins, propagates to every repo that adds it.
+/workflow-templates/ @cogniumhq/coreteam
+
+# The organization's public landing page.
+/profile/ @cogniumhq/coreteam
