@@ -1,7 +1,12 @@
 # Cognium Labs
 
-**Trust infrastructure for software built with AI agents.**
-Agents do the work. Cognium proves what they did.
+**Cognium Autonomous Loop for software modernization**
+
+The Loop helps teams work through pull requests and issues in existing repositories. Agents prepare changes. A deterministic checking engine records which checks ran, what passed, and what still needs a person. Your team decides whether to merge each draft pull request.
+
+For example, in a public test repository, a dependency update cleared a security advisory. Two call sites had no test coverage, so the Loop opened a draft PR explaining what still needed review. [See the pull request](https://github.com/mason-cognium/CVE-2022-42889-PoC/pull/2).
+
+[Join the hosted Loop waitlist](https://cognium.net/start/) · [Run the open-source checking engine](https://github.com/cogniumhq/cognium-dev) · [See how the Loop works](https://cognium.net/how-it-works/)
 
 [![cognium.net](https://img.shields.io/badge/Cognium_Labs_Inc-cognium.net-0a0a0b?labelColor=6ee7b7&color=111111)](https://cognium.net)
 
