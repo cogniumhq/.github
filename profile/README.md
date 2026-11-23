@@ -2,99 +2,46 @@
 
 **Cognium Autonomous Loop for software modernization**
 
-The Loop helps teams work through pull requests and issues in existing repositories. Agents prepare changes. A deterministic checking engine records which checks ran, what passed, and what still needs a person. Your team decides whether to merge each draft pull request.
+The Loop helps teams work through pull requests and issues in existing repositories. Agents prepare changes. Deterministic checks record what passed, what failed, and what still needs a person. Your team decides whether to merge.
 
-For example, in a public test repository, a dependency update cleared a security advisory. Two call sites had no test coverage, so the Loop opened a draft PR explaining what still needed review. [See the pull request](https://github.com/mason-cognium/CVE-2022-42889-PoC/pull/2).
+[How the Loop works](https://cognium.net/how-it-works/) · [Join the hosted waitlist](https://cognium.net/start/)
 
-[Join the hosted Loop waitlist](https://cognium.net/start/) · [Run the open-source checking engine](https://github.com/cogniumhq/cognium-dev) · [See how the Loop works](https://cognium.net/how-it-works/)
+## What a reviewer sees
 
-[![cognium.net](https://img.shields.io/badge/Cognium_Labs_Inc-cognium.net-0a0a0b?labelColor=6ee7b7&color=111111)](https://cognium.net)
+In a recorded run on a public test repository, an agent updated a dependency and the advisory check passed. Two call sites had no test coverage. The Loop opened a draft pull request that identified the untested behavior so a reviewer could decide whether to merge. [Read the draft PR](https://github.com/mason-cognium/CVE-2022-42889-PoC/pull/2).
 
----
+The intended workflow starts with rules recovered from your code and approved by your team. Each change is checked against those rules, and the review record ties the request, the diff, and the results together. Spec recovery is read-only today. [Explore the checks](https://cognium.net/#hood) · [Inspect the evidence](https://cognium.net/proof/)
 
-## Open source
+## Run a local scan
 
-Three projects, each usable on its own.
+[cognium-dev](https://github.com/cogniumhq/cognium-dev) is the open-source checking engine. Use its CLI to scan a source directory for security findings, including data flows across files. From a repository with a `src` directory, run:
 
-### [cognium-dev](https://github.com/cogniumhq/cognium-dev) — SAST for agent-written code
-
-[![npm](https://img.shields.io/npm/v/cognium-dev.svg?label=cognium-dev)](https://www.npmjs.com/package/cognium-dev)
-[![npm](https://img.shields.io/npm/v/circle-ir.svg?label=circle-ir)](https://www.npmjs.com/package/circle-ir)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/cogniumhq/cognium-dev/blob/main/LICENSE)
-
-Static analysis that finds real vulnerabilities through cross-file taint
-analysis — across JavaScript, TypeScript, Python, Java, Go, C#, Rust and Bash.
-
-```bash
+~~~bash
 npm install -g cognium-dev
 cognium-dev scan ./src
-```
+~~~
 
-Results are auditable: [sast-benchmarks](https://github.com/cogniumhq/sast-benchmarks)
-publishes scored runs against OWASP Benchmark, CWE-Bench-Java and Juliet — one
-dataset revision, one scorer, raw artifacts included.
+## Modernization packs
 
-### [skillsregistry](https://github.com/cogniumhq/skillsregistry) — find MCP servers and agent skills
+| Pack | What it checks |
+| --- | --- |
+| [Databricks data migration](https://cognium.net/packs/databricks-migration/) | Whether SQL converted from Snowflake preserves the behavior the data owners approved. |
+| [Accessibility](https://cognium.net/packs/accessibility/) | Web, PDF, and mobile accessibility against WCAG criteria, with findings for review. |
+| [Kubernetes operations](https://cognium.net/packs/kubernetes-operations/) | Whether proposed changes and the running cluster meet approved requirements. |
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/cogniumhq/skillsregistry/blob/main/LICENSE)
+## Open-source projects and integrations
 
-Discover MCP servers and agent skills by what they do, with explicit trust and
-scan-coverage signals. Connect a client to the hosted, read-only catalog — no
-API key, no signup:
+| If you want to… | Start here |
+| --- | --- |
+| Keep a feature spec, design, and tasks alongside the code | [Specifica](https://github.com/cogniumhq/specifica) defines the Markdown files in `.specifica/`. [Read the standard](https://specifica.org/). |
+| Find MCP servers and agent skills by task | [SkillsRegistry](https://skillsregistry.net/) shows the trust and scan coverage recorded for each result. The [repository](https://github.com/cogniumhq/skillsregistry) contains the TypeScript SDK and a self-hostable node. |
+| Use Cognium from an editor | [Cognium MCP](https://github.com/cogniumhq/cognium-mcp) provides the MCP server and editor plugins. |
+| Run security scans in CI | Use the [GitHub Action](https://github.com/cogniumhq/cognium-ai-action) or the [Buildkite plugin](https://github.com/cogniumhq/cognium-buildkite-plugin). |
+| Inspect security benchmark results | [sast-benchmarks](https://github.com/cogniumhq/sast-benchmarks) publishes scored runs and raw artifacts for OWASP Benchmark, CWE-Bench-Java, and Juliet. |
+| Compare accessibility checkers | Inspect the [WCAG test fixtures](https://github.com/cogniumhq/a11y-benchmark) and the [published result bundles](https://github.com/cogniumhq/a11y-benchmark-results). |
 
-```bash
-claude mcp add --transport http --scope user skillsregistry https://api.skillsregistry.net/mcp
-```
+## Contributing and contact
 
-The repository holds the Apache-2.0 TypeScript SDK and a self-hostable local
-node. **Unscanned means unscanned, not safe** — trust signals are context for
-review, not a guarantee.
+For a bug or feature request, open an issue in the relevant project. For larger changes, discuss the approach there and follow the repository’s contribution guide. Report security vulnerabilities privately to [security@cognium.net](mailto:security@cognium.net).
 
-### [specifica](https://github.com/cogniumhq/specifica) — an open spec format for Git
-
-[![npm](https://img.shields.io/npm/v/@specifica/format.svg?label=@specifica/format)](https://www.npmjs.com/package/@specifica/format)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/cogniumhq/specifica/blob/main/LICENSE)
-
-A `.specifica/` directory convention for writing software specs as markdown in
-any Git repo. Three files per feature — `spec.md` (what), `design.md` (how),
-`tasks.md` (work). Tool-agnostic, and deliberately useful without any tool.
-
-```bash
-npm install @specifica/format
-```
-
-An open standard anyone can adopt; [specifica.app](https://specifica.app) is
-one editor that implements it.
-
----
-
-## Also here
-
-| Repo | What it is |
-|---|---|
-| [sast-benchmarks](https://github.com/cogniumhq/sast-benchmarks) | Auditable SAST scoring vs CodeQL, Semgrep and others |
-| [cognium-ai-action](https://github.com/cogniumhq/cognium-ai-action) | GitHub Action for Cognium security scanning |
-| [cognium-buildkite-plugin](https://github.com/cogniumhq/cognium-buildkite-plugin) | Buildkite plugin for Cognium Dev |
-| [conformis](https://github.com/cogniumhq/conformis) | Conformance issues and findings |
-
-## Contributing
-
-Each repository has its own `CONTRIBUTING.md`. External contributions are
-welcome and no CLA form is required — open an issue before starting
-non-trivial work.
-
-Found a vulnerability? **Do not open a public issue.** Report it privately to
-[security@cognium.net](mailto:security@cognium.net); see the security policy in
-the affected repository.
-
-## Links
-
-- [cognium.net](https://cognium.net) — company
-- [cognium.dev](https://cognium.dev) — Cognium SAST
-- [skillsregistry.net](https://skillsregistry.net) — catalog and product docs
-- [specifica.org](https://specifica.org) — the open spec format
-- [hello@cognium.net](mailto:hello@cognium.net)
-
----
-
-*[Cognium Labs Inc](https://cognium.net) · 2026*
+For hosted onboarding, [join the waitlist](https://cognium.net/start/). For other inquiries, contact [hello@cognium.net](mailto:hello@cognium.net).
